@@ -2,14 +2,20 @@ import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 import os
 
-API_TOKEN = os.getenv("7223539248:AAGGA_BIsoI_USib1fl-H9sOVwHDh8Hovqg")
+# استخدم التوكن من متغير بيئة
+API_TOKEN = os.getenv("BOT_TOKEN")
 bot = telebot.TeleBot(API_TOKEN)
 
 @bot.message_handler(commands=['start'])
-def send_welcome(message):
+def send_roastyface(message):
     markup = InlineKeyboardMarkup()
-    web_app_url = "https://mini-ap-ps-85qd.vercel.app/"  # غيّر هذا بالرابط الحقيقي
-    markup.add(InlineKeyboardButton(text="🎮 Start AIBuddy", web_app=WebAppInfo(url=web_app_url)))
-    bot.send_message(message.chat.id, "Welcome to AI Buddy!\nTap the button below to start:", reply_markup=markup)
+    mini_app_url = "https://roastyface.vercel.app"  # ضع هنا رابط Vercel بعد النشر
+    btn = InlineKeyboardButton("🔥 Roast Me Now", web_app=WebAppInfo(url=mini_app_url))
+    markup.add(btn)
+    bot.send_message(
+        message.chat.id,
+        "Welcome to RoastyFace 😈\nLet the AI roast you... if you dare!",
+        reply_markup=markup
+    )
 
 bot.polling()
